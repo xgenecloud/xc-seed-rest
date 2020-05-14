@@ -1,0 +1,76 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Create APIs at the speed of your thoughts",
+    "version": "1.0.0",
+    "title": "XgeneCloud",
+    "contact": {}
+  },
+  "host": "localhost:8081",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "common"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/health": {
+      "get": {
+        "tags": [
+          "common"
+        ],
+        "summary": "Get server health",
+        "description": "",
+        "operationId": "health",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "example": {
+                "process_uptime": "282.6 Seconds",
+                "process_memory_usage": {
+                  "rss": "46.73 MB",
+                  "heapTotal": "24.62 MB",
+                  "heapUsed": "19.74 MB",
+                  "external": "1.59 MB"
+                },
+                "os_total_memory": "16384.00 MB",
+                "os_free_memory": "826.23 MB",
+                "os_load_average": [
+                  "3.51",
+                  "3.36",
+                  "3.24"
+                ],
+                "v8_heap_statistics": {
+                  "total_heap_size": "24.62 MB",
+                  "total_heap_size_executable": "0.80 MB",
+                  "total_physical_size": "22.25 MB",
+                  "total_available_size": "2075.67 MB",
+                  "used_heap_size": "19.75 MB",
+                  "heap_size_limit": "2096.00 MB",
+                  "malloced_memory": "0.09 MB",
+                  "peak_malloced_memory": "10.10 MB",
+                  "does_zap_garbage": 0,
+                  "number_of_native_contexts": 2,
+                  "number_of_detached_contexts": 0
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {},
+  "externalDocs": {
+    "description": "Find out more about XgeneCloud",
+    "url": "http://xgenecloud.com"
+  }
+}

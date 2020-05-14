@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "name": "dvdrental-rest",
+  "alias": "dvdrental-rest.now.sh",
+  "functions": {
+    "api/index.js": {
+      "maxDuration": 10,
+      "includeFiles" : "{config.xc.json,server/**/*}"
+    }
+  },
+  "routes": [
+    {
+      "headers": {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "Access-Control-Allow-Headers": "X-Requested-With, Content-Type, Accept"
+      },
+      "src": "/.*",
+      "dest": "/api/index.js"
+    }
+  ]
+}

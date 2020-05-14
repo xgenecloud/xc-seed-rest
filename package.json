@@ -1,0 +1,100 @@
+{
+  "name": "xc_struct_public1",
+  "version": "1.0.0",
+  "description": "ab2",
+  "main": "server/app.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "start": "cross-env NODE_ENV=production node server/app.js",
+    "dev": "cross-env NODE_ENV=dev nodemon server/app.js",
+    "install1": "npm install",
+    "postinstall": "node ./postInstall.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docs": "rm -rf docs/* && ./node_modules/.bin/jsdoc -c jsdoc.json && open docs/index.html",
+    "xc": "npm install --save xc-core@latest xc-data-mapper@latest xc-migrator@latest",
+    "lint": "eslint \"server/**\" --config .eslintrc.js",
+    "gcp:fn": "gcloud functions deploy xc-app-function --runtime nodejs10 --trigger-http --entry-point app",
+    "gcp:cloud:build": "gcloud builds submit --tag gcr.io/PROJECT-ID/xc-rest-image",
+    "gcp:cloud:run": "gcloud run deploy --image gcr.io/PROJECT-ID/xc-rest-image  --platform managed  --add-cloudsql-instances INSTANCE_CONNECTION_NAME --update-env-vars INSTANCE_CONNECTION_NAME=\"INSTANCE_CONNECTION_NAME\"",
+    "zeit:now": "now && now alias",
+    "aws:lambda:zip": "npm prune --production ; rm lambda.zip ; zip -r -o lambda.zip .",
+    "aws:lambda:zip:win": "npm prune --production ; del /f lambda.zip ; powershell Compress-Archive . lambda.zip",
+    "azure:start": "func start",
+    "azure:deploy": "func azure functionapp publish xc-azure-function",
+    "ali:fn:compute": "fun deploy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/o1lab/xgene_structure.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/o1lab/xgene_structure/issues"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "server/tool/*"
+    ]
+  },
+  "homepage": "https://github.com/o1lab/xgene_structure#readme",
+  "dependencies": {
+    "@webserverless/fc-express": "latest",
+    "aws-serverless-express": "^3.3.8",
+    "azure-function-express": "^2.0.0",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "boxen": "^4.2.0",
+    "clear": "^0.1.0",
+    "cli-table": "^0.3.1",
+    "colors": "^1.4.0",
+    "compression": "^1.7.4",
+    "connect-session-knex": "^1.5.0",
+    "cookie-parser": "^1.4.4",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-rate-limit": "^5.1.1",
+    "express-session": "^1.17.0",
+    "express-status-monitor": "^1.2.10",
+    "glob": "latest",
+    "handlebars": "^4.7.6",
+    "helmet": "^3.21.3",
+    "jexcel": "^4.0.0",
+    "jsonfile": "^5.0.0",
+    "lodash": "^4.17.15",
+    "morgan": "^1.9.1",
+    "mssql": "^6.0.1",
+    "multer": "^1.4.2",
+    "mysql": "^2.17.1",
+    "nodemailer": "^6.4.2",
+    "passport": "^0.4.1",
+    "passport-facebook": "^3.0.0",
+    "passport-google-oauth20": "^2.0.0",
+    "passport-local": "^1.0.0",
+    "passport-oauth2-refresh": "^1.1.0",
+    "pg": "^7.16.0",
+    "raw-body": "^2.4.1",
+    "swagger-ui-express": "^4.1.4",
+    "uuid": "^3.3.3",
+    "validator": "^12.1.0",
+    "xc-core": "0.0.34",
+    "xc-data-mapper": "0.0.20",
+    "xc-migrator": "0.0.27"
+  },
+  "devDependencies": {
+    "@pixi/jsdoc-template": "^2.5.1",
+    "chai": "^4.2.0",
+    "cross-env": "^7.0.0",
+    "eslint": "^6.8.0",
+    "ink-docstrap": "^1.3.2",
+    "jsdoc": "^3.6.3",
+    "mocha": "^6.2.2",
+    "nodemon": "^2.0.2",
+    "should": "^13.2.3",
+    "supertest": "^4.0.2",
+    "supertest-session": "^4.0.0"
+  }
+}

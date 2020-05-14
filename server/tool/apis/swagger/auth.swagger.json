@@ -1,0 +1,445 @@
+{
+  "tags": [
+    {
+      "name": "Authentication",
+      "description": "Everything about User Authentication"
+    }
+  ],
+  "paths": {
+    "/api/v1/auth/signin": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "User login",
+        "description": "",
+        "operationId": "login",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Authentication user details",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/userAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Authenticated successfully",
+            "schema": {
+              "$ref": "#/definitions/user"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/signup": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "User signup",
+        "description": "",
+        "operationId": "signup",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Signup user details",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/user"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Registration success",
+            "schema": {
+              "$ref": "#/definitions/user"
+            }
+          },
+          "400": {
+            "description": "Bad request"
+          }
+        }
+      }
+    },
+    "/api/v1/auth/signout": {
+      "get": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "User logout",
+        "description": "",
+        "operationId": "logout",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+        ],
+        "responses": {
+          "200": {
+            "description": "Logout success"
+          }
+        }
+      }
+    },
+    "/api/v1/auth/password/forgot": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Password Forgot",
+        "description": "",
+        "operationId": "passwordForgot",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Signup user details",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string",
+                  "required": true,
+                  "example": "test@xgenecloud.com"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Registration success",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/email/validate/{tokenId}": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Email validate link",
+        "description": "",
+        "operationId": "emailValidate",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "tokenId",
+            "in": "path",
+            "description": "random token id received",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Validated successfully"
+          }
+        }
+      }
+    },
+    "/api/v1/auth/token/validate/{tokenId}": {
+      "get": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Validate password reset token",
+        "description": "",
+        "operationId": "passwordResetTokenValidate",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "tokenId",
+            "in": "path",
+            "description": "random token id received",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Validated successfully"
+          }
+        }
+      }
+    },
+    "/api/v1/auth/password/reset/": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Password reset",
+        "description": "",
+        "operationId": "passwordReset",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "tokenId",
+            "in": "path",
+            "description": "random token id received",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Reset password details",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "password": {
+                  "type": "string",
+                  "format": "password",
+                  "example": "password",
+                  "required": true
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Password reset successfully"
+          }
+        }
+      }
+    },
+    "/api/v1/user/me": {
+      "get": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "USer details",
+        "description": "",
+        "operationId": "userDetails",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "User details"
+          }
+        }
+      }
+    },
+    "/api/v1/user": {
+      "put": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Update user details",
+        "description": "",
+        "operationId": "updateUserDetails",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "User details"
+          }
+        },
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Updated user details",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/user"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/user/password/change": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Update user details",
+        "description": "",
+        "operationId": "passwordChange",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "User details"
+          }
+        },
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Current password and new password",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "currentPassword": {
+                  "type": "string",
+                  "format": "password",
+                  "example": "password"
+                },
+                "newPassword": {
+                  "type": "string",
+                  "format": "password",
+                  "example": "newPassword"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/auth/google": {
+      "get": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Google authentication url",
+        "description": "",
+        "operationId": "googleAuthentication"
+      }
+    },
+    "/api/v1/auth/facebook": {
+      "get": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Facebook authentication url",
+        "description": "",
+        "operationId": "facebookAuthentication"
+      }
+    },
+    "/api/v1/auth/google/callback": {
+      "get": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Google authentication callback url",
+        "description": "",
+        "operationId": "googleAuthenticationCallback"
+      }
+    },
+    "/api/v1/auth/facebook/callback": {
+      "get": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Facebook authentication callback url",
+        "description": "",
+        "operationId": "facebookAuthenticationCallback"
+      }
+    }
+  },
+  "definitions": {
+    "userAuth": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "format": "email",
+          "nullable": false,
+          "example": "test@xgenecloud.com"
+        },
+        "password": {
+          "type": "string",
+          "format": "password",
+          "nullable": false,
+          "example": "password"
+        }
+      }
+    },
+    "user": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/userAuth"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "nullable": false,
+              "readOnly": true
+            },
+            "firstname": {
+              "type": "string",
+              "nullable": false,
+              "example": "FirstName"
+            },
+            "lastname": {
+              "type": "string",
+              "nullable": false,
+              "example": "LastName"
+            },
+            "roles": {
+              "type": "object",
+              "readOnly": true
+            },
+            "created_at": {
+              "type": "string",
+              "readOnly": true
+            },
+            "updated_at": {
+              "type": "string",
+              "readOnly": true
+            },
+            "email_verified": {
+              "type": "boolean",
+              "readOnly": true
+            }
+          }
+        }
+      ]
+    }
+  }
+}
