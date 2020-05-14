@@ -2,13 +2,13 @@ module.exports = {
   "port" :8081,
   "auth": {
     "google": {
-      "clientID": "",
-      "clientSecret": "",
+      "clientID": "client_id",
+      "clientSecret": "client_secret",
       "callbackUrl": "https://example.com/api/v1/auth/google/callback"
     },
     "facebook": {
-      "clientID": "",
-      "clientSecret": "",
+      "clientID": "client_id",
+      "clientSecret": "client_secret",
       "callbackUrl": "https://example.com/api/v1/auth/facebook/callback"
     }
   },

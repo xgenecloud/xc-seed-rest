@@ -3,13 +3,13 @@ module.exports = {
   "siteUrl": "https://example.com/",
   "auth": {
     "google": {
-      "clientID": "",
-      "clientSecret": "",
+      "clientID": "client_id",
+      "clientSecret": "client_secret",
       "callbackUrl": "https://example.com/api/v1/auth/google/callback"
     },
     "facebook": {
-      "clientID": "",
-      "clientSecret": "",
+      "clientID": "client_id",
+      "clientSecret": "client_secret",
       "callbackUrl": "https://example.com/api/v1/auth/facebook/callback"
     }
   },
