@@ -5,12 +5,8 @@ services:
   - mysql
 before_install:
   - cp ./test-config.xc.json ./config.xc.json
-  - curl https://raw.githubusercontent.com/xgenecloud/xc-data/master/sakila-data.sql > sakila-data.sql
-  - curl https://raw.githubusercontent.com/xgenecloud/xc-data/master/sakila-schema.sql > sakila-schema.sql
-  - mysql -e 'CREATE DATABASE IF NOT EXISTS sakila;'
-  - mysql -u root --default-character-set=utf8 sakila < sakila-schema.sql
-  - mysql -u root --default-character-set=utf8 sakila < sakila-data.sql
-  - mysql -u root --default-character-set=utf8 sakila < server/tool/misc/auth/mysql/20200224_131832.up.sql
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS db;'
+  - mysql -u root --default-character-set=utf8 db < server/tool/misc/auth/mysql/20200224_131832.up.sql
 install:
   - npm install
 script:

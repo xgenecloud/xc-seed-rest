@@ -10,7 +10,7 @@
             "port": "3306",
             "user": "root",
             "password": "",
-            "database": "sakila"
+            "database": "db"
           },
           "meta": {
             "tableName": "_evolutions",
