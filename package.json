@@ -81,9 +81,9 @@
     "swagger-ui-express": "^4.1.4",
     "uuid": "^3.3.3",
     "validator": "^12.1.0",
-    "xc-core": "0.0.34",
-    "xc-data-mapper": "0.0.20",
-    "xc-migrator": "0.0.28"
+    "xc-core": "^0.3.0",
+    "xc-data-mapper": "^0.3.0",
+    "xc-migrator": "^0.3.0"
   },
   "devDependencies": {
     "@pixi/jsdoc-template": "^2.5.1",
