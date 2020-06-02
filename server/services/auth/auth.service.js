@@ -8,8 +8,7 @@ const nodemailer = require('nodemailer');
 const bcrypt = require('bcryptjs');
 
 const uuidv4 = require('uuid/v4');
-const emailRe = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
+const validator = require('validator');
 
 class AuthService extends BaseService {
 
@@ -62,7 +61,7 @@ class AuthService extends BaseService {
       throw new Error({msg: `Email '${req.body.email}' already registered`})
     }
 
-    if (!emailRe.test(req.body.email)) {
+    if (!validator.isEmail(req.body.email)) {
       throw new Error({msg: `Invalid email`})
     }
 
@@ -203,7 +202,7 @@ class AuthService extends BaseService {
     if (req.isAuthenticated()) {
 
       const user = await this.users.findOne({where: `(email,eq,${req.user.email})`});
-      const hashedPassword = await XcUtils.getBCryptHash(bcrypt,currentPassword, user.salt);
+      const hashedPassword = await XcUtils.getBCryptHash(bcrypt, currentPassword, user.salt);
       if (hashedPassword !== user.password) {
         throw new Error('Current password is wrong');
       }
