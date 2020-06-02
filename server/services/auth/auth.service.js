@@ -8,6 +8,7 @@ const nodemailer = require('nodemailer');
 const bcrypt = require('bcryptjs');
 
 const uuidv4 = require('uuid/v4');
+const validator = require('validator')
 
 
 class AuthService extends BaseService {
@@ -60,6 +61,11 @@ class AuthService extends BaseService {
     if (user && user.email) {
       throw new Error({msg: `Email '${req.body.email}' already registered`})
     }
+
+    if(!validator.isEmail(user.email)){
+      throw new Error({msg: `Invalid email`})
+    }
+
 
     user = await this.users.insert(req.body);
 
