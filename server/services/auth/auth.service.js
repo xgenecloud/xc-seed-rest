@@ -8,7 +8,7 @@ const nodemailer = require('nodemailer');
 const bcrypt = require('bcryptjs');
 
 const uuidv4 = require('uuid/v4');
-const validator = require('validator')
+const emailRe = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 
 class AuthService extends BaseService {
@@ -62,7 +62,7 @@ class AuthService extends BaseService {
       throw new Error({msg: `Email '${req.body.email}' already registered`})
     }
 
-    if(!validator.isEmail(user.email)){
+    if (!emailRe.test(user.email)) {
       throw new Error({msg: `Invalid email`})
     }
 
