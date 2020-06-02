@@ -7,7 +7,7 @@
     "doc": "docs"
   },
   "scripts": {
-    "start": "cross-env NODE_ENV=production node server/app.js",
+    "start": "NODE_ENV=production node server/app.js",
     "dev": "cross-env NODE_ENV=dev nodemon server/app.js",
     "install1": "npm install",
     "postinstall": "node ./postInstall.js",
@@ -23,7 +23,8 @@
     "aws:lambda:zip:win": "npm prune --production ; del /f lambda.zip ; powershell Compress-Archive . lambda.zip",
     "azure:start": "func start",
     "azure:deploy": "func azure functionapp publish xc-azure-function",
-    "ali:fn:compute": "fun deploy"
+    "ali:fn:compute": "fun deploy",
+    "test:travis": "NODE_ENV=test ./node_modules/.bin/mocha server/tests/router/*.test.js --exit"
   },
   "repository": {
     "type": "git",
@@ -82,7 +83,7 @@
     "validator": "^12.1.0",
     "xc-core": "0.0.34",
     "xc-data-mapper": "0.0.20",
-    "xc-migrator": "0.0.27"
+    "xc-migrator": "0.0.28"
   },
   "devDependencies": {
     "@pixi/jsdoc-template": "^2.5.1",

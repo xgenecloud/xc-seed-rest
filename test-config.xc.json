@@ -1,0 +1,34 @@
+ {
+  "title": "xc-rest",
+  "envs": {
+    "test": {
+      "db": [
+        {
+          "client": "mysql",
+          "connection": {
+            "host": "localhost",
+            "port": "3306",
+            "user": "root",
+            "password": "",
+            "database": "sakila"
+          },
+          "meta": {
+            "tableName": "_evolutions",
+            "dbAlias": "primary"
+          }
+        }
+      ],
+      "api" : {}
+    }
+  },
+  "workingEnv": "dev",
+  "meta": {
+    "version": "0.5",
+    "seedsFolder": "seeds",
+    "queriesFolder": "queries",
+    "apisFolder": "apis",
+    "projectType": "rest"
+  },
+  "api": {}
+}
+

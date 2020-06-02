@@ -17,8 +17,6 @@ function execute(command) {
       // child_proc.stdout.on('data', (data) => {
       //   console.log(`${data}`);
       // });
-
-
       const { spawn } = require('child_process');
       const ls = spawn('npm' , ['install']);
 

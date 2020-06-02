@@ -3,6 +3,7 @@
 FROM node:12-slim
 
 ENV PORT 8080
+ENV NODE_ENV=production
 
 # Create and change to the app directory.
 WORKDIR /usr/src/app
@@ -13,7 +14,7 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 # Install production dependencies.
-RUN npm install --only=production
+RUN npm install
 
 # Copy local code to the container image.
 COPY . ./
