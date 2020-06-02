@@ -1,3 +1,7 @@
+[![Build Status](https://travis-ci.org/dwyl/esta.svg?branch=master)](https://travis-ci.com/github/xgenecloud/xc-seed-rest) 
+
+
+
 knexMigrator
 xc-data-mapper
 chart
