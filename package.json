@@ -24,7 +24,7 @@
     "azure:start": "func start",
     "azure:deploy": "func azure functionapp publish xc-azure-function",
     "ali:fn:compute": "fun deploy",
-    "test:travis": "NODE_ENV=test ./node_modules/.bin/mocha server/tests/router/auth.test.js --exit"
+    "test:travis": "NODE_ENV=test ./node_modules/.bin/mocha server/tests/router/*.test.js --exit"
   },
   "repository": {
     "type": "git",

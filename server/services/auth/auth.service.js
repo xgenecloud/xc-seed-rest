@@ -10,6 +10,7 @@ const bcrypt = require('bcryptjs');
 const uuidv4 = require('uuid/v4');
 const validator = require('validator');
 
+
 class AuthService extends BaseService {
 
   constructor(app) {
@@ -57,6 +58,7 @@ class AuthService extends BaseService {
 
 
     let user = await this.users.findOne({where: `(email,eq,${req.body.email})`});
+
     if (user && user.email) {
       throw new Error({msg: `Email '${req.body.email}' already registered`})
     }
@@ -64,7 +66,6 @@ class AuthService extends BaseService {
     if (!validator.isEmail(req.body.email)) {
       throw new Error({msg: `Invalid email`})
     }
-
 
     user = await this.users.insert(req.body);
 
@@ -202,7 +203,7 @@ class AuthService extends BaseService {
     if (req.isAuthenticated()) {
 
       const user = await this.users.findOne({where: `(email,eq,${req.user.email})`});
-      const hashedPassword = await XcUtils.getBCryptHash(bcrypt, currentPassword, user.salt);
+      const hashedPassword = await XcUtils.getBCryptHash(bcrypt,currentPassword, user.salt);
       if (hashedPassword !== user.password) {
         throw new Error('Current password is wrong');
       }
