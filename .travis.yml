@@ -4,7 +4,6 @@ node_js:
 services:
   - mysql
 before_install:
-  - rm ./config.xc.json
   - cp ./test-config.xc.json ./config.xc.json
   - curl https://raw.githubusercontent.com/xgenecloud/xc-data/master/sakila-data.sql > sakila-data.sql
   - curl https://raw.githubusercontent.com/xgenecloud/xc-data/master/sakila-schema.sql > sakila-schema.sql
