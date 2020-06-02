@@ -62,7 +62,7 @@ class AuthService extends BaseService {
       throw new Error({msg: `Email '${req.body.email}' already registered`})
     }
 
-    if (!emailRe.test(user.email)) {
+    if (!emailRe.test(req.user.email)) {
       throw new Error({msg: `Invalid email`})
     }
 
