@@ -1,5 +1,5 @@
 module.exports = {
-  "port" :8081,
+  "port" :8080,
   "auth": {
     "google": {
       "clientID": "client_id",
