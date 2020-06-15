@@ -6,7 +6,7 @@
     "title": "XgeneCloud",
     "contact": {}
   },
-  "host": "localhost:8081",
+  "host": "localhost:8080",
   "basePath": "/",
   "tags": [
     {

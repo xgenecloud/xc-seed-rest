@@ -84,7 +84,7 @@ class AuthRouter extends BaseRouter {
         next();
       },
       passport.authenticate('google', {scope: ['profile', 'email']
-        // ,callbackURL:'http://localhost:8081/api/v1/auth/google/callback'
+        // ,callbackURL:'http://localhost:8080/api/v1/auth/google/callback'
       }));
 
     router.get('/api/v1/auth/google/callback',

@@ -115,8 +115,8 @@ swagger spec
 - test
     
     ```
-    xc-examples-$autocannon -p 20 -c 50 -d 10 http://localhost:8081/api/v1/country
-    Running 10s test @ http://localhost:8081/api/v1/country
+    xc-examples-$autocannon -p 20 -c 50 -d 10 http://localhost:8080/api/v1/country
+    Running 10s test @ http://localhost:8080/api/v1/country
     50 connections with 20 pipelining factor
     
     ┌─────────┬──────┬──────┬────────┬────────┬──────────┬───────────┬────────────┐
@@ -136,8 +136,8 @@ swagger spec
     
     15k requests in 10.07s, 21.2 MB read
   
-    xc-examples-$autocannon -p 20 -c 50 -d 10 http://localhost:8081/api/v1/country/has/city  
-    Running 10s test @ http://localhost:8081/api/v1/country/has/city
+    xc-examples-$autocannon -p 20 -c 50 -d 10 http://localhost:8080/api/v1/country/has/city  
+    Running 10s test @ http://localhost:8080/api/v1/country/has/city
     50 connections with 20 pipelining factor
     
     ┌─────────┬──────┬──────┬─────────┬─────────┬──────────┬──────────┬────────────┐
@@ -159,8 +159,8 @@ swagger spec
     
       
       
-    xc-examples-$autocannon -p 20 -c 50 -d 10 http://localhost:8081/country/1/city
-    Running 10s test @ http://localhost:8081/country/1/city
+    xc-examples-$autocannon -p 20 -c 50 -d 10 http://localhost:8080/country/1/city
+    Running 10s test @ http://localhost:8080/country/1/city
     50 connections with 20 pipelining factor
     
     ┌─────────┬──────┬──────┬────────┬────────┬──────────┬──────────┬────────────┐
