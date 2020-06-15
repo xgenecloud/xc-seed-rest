@@ -73,7 +73,7 @@ class AuthService extends BaseService {
 
     await this.transporter.sendMail({
       from: this.app.$config.mailer.from,
-      to: "pranavcbalan@gmail.com",
+      to: req.body.email,
       subject: "Message title",
       text: "Plaintext version of the message",
       html: `<p> verification url : http://localhost:8080/api/v1/auth/email/validate/${user.email_verification_token}</p>`
@@ -111,7 +111,7 @@ class AuthService extends BaseService {
 
       await this.transporter.sendMail({
         from: this.app.$config.mailer.from,
-        to: "pranavcbalan@gmail.com",
+        to: user.email,
         subject: "Message title",
         text: "Plaintext version of the message",
         html: `<p> Token : ${token}</p>`
