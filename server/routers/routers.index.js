@@ -7,15 +7,17 @@ const morgan = require('morgan');
 const session = require("express-session");
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
-const KnexSessionStore = require("connect-session-knex")(session);
 const passport = require('passport');
 const fs = require('fs');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('../tool/apis/swagger/swagger-base.xc');
 const multer = require('multer')
 const helmet = require('helmet')
-const rateLimit = require("express-rate-limit");
-const compression = require('compression')
+// const rateLimit = require("express-rate-limit");
+// const compression = require('compression')
+
+
+console.log('==========', process.env.NODE_ENV)
 
 class Router extends BaseComponent {
 
@@ -31,13 +33,14 @@ class Router extends BaseComponent {
 
   async start() {
 
-    if (!(this.app.$config.azure.functionApp || this.app.$config.aws.lambda || this.app.$config.zeit.now || this.app.$config.alibaba.functionCompute)) {
+    if (!(this.app.$config.azure.functionApp || this.app.$config.aws.lambda || this.app.$config.zeit.now || this.app.$config.alibaba.functionCompute || this.app.$config.serverlessFramework.express)) {
       this.router.listen(this.app.$config.port, function () {
       })
     }
   }
 
   _getSessionStore() {
+    const KnexSessionStore = require("connect-session-knex")(session);
 
     const store = new KnexSessionStore({
       knex: this.app.$dbs.primaryDb,
@@ -102,7 +105,7 @@ class Router extends BaseComponent {
     /**************** END : multer routes ****************/
 
     // Todo: Azure function app has issue with session
-    if (!(this.app.$config.azure.functionApp || this.app.$config.zeit.now)) {
+    if (!(this.app.$config.azure.functionApp || this.app.$config.zeit.now || this.app.$config.serverlessFramework.express)) {
       this.router.use(
         session({
           resave: false,
@@ -118,7 +121,7 @@ class Router extends BaseComponent {
     this.router.use(cookieParser('XGene Cloud')); //session secret - should be overriden
     this.router.use(passport.initialize());
 
-    if (!this.app.$config.azure.functionApp) {
+    if (!(this.app.$config.azure.functionApp || this.app.$config.serverlessFramework.express)) {
       this.router.use(passport.session());
     }
 

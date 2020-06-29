@@ -12,7 +12,7 @@ CREATE TABLE `users` (
   `provider` varchar(255) DEFAULT 'local',
   `provider_data` mediumtext,
   `provider_data_plus` mediumtext,
-  `provider_ids` varchar(1024) DEFAULT NULL,
+  `provider_ids` TEXT DEFAULT NULL,
   `reset_password_token` varchar(45) DEFAULT NULL,
   `reset_password_expires` timestamp(6) NULL DEFAULT NULL,
   `email_verification_token` varchar(255) DEFAULT NULL,

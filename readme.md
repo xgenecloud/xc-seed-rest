@@ -233,3 +233,6 @@ swagger spec
     - or `fun deploy`
     
     
+# Serverless
+
+- Configuring serverless and aws-cli : https://www.serverless.com/framework/docs/providers/aws/guide/credentials/
