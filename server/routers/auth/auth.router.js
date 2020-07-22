@@ -68,7 +68,7 @@ class AuthRouter extends BaseRouter {
     router.post('/api/v1/auth/signup', this.catchErr(this.signup));
     router.get('/api/v1/auth/signout', this.catchErr(this.signout));
     router.post('/api/v1/auth/password/forgot', this.catchErr(this.passwordForgot));
-    router.post('/api/v1/auth/email/validate/:tokenId', this.catchErr(this.emailValidate));
+    router.get('/api/v1/auth/email/validate/:tokenId', this.catchErr(this.emailValidate));
     router.get('/api/v1/auth/token/validate/:tokenId', this.catchErr(this.tokenValidate));
     router.post('/api/v1/auth/password/reset/:tokenId', this.catchErr(this.passwordReset));
     router.get('/api/v1/user/me', this.catchErr(this.me));
