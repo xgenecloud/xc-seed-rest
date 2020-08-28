@@ -79,7 +79,7 @@ class Router extends BaseComponent {
     /**************** START : multer ****************/
     this.storage = multer.diskStorage({
       destination: function (req, file, cb) {
-        cb(null, process.cwd());
+        cb(null, path.join(process.cwd(),'server','public'));
       },
       filename: function (req, file, cb) {
         console.log(file);
@@ -91,6 +91,10 @@ class Router extends BaseComponent {
     /**************** END : multer ****************/
 
     /**************** START : multer routes ****************/
+    /**
+     * Download and upload api is to demonstrate how these apis works
+     * Please modify as per your business needs
+     * */
     this.router.post(
       "/upload",
       this.upload.single("file"),
@@ -138,8 +142,15 @@ class Router extends BaseComponent {
 
 
   downloadFile(req, res) {
-    let file = path.join(process.cwd(), req.query.name);
-    res.download(file);
+    const sPath = path.join(process.cwd(),'server','public');
+    const sFileName = path.normalize(req.query.name);
+    const sFileToDownload = path.join(sPath, sFileName);
+    if (sFileToDownload.startsWith(sPath))
+      res.download(sFileToDownload);
+    else
+      res.status(400).json({
+        msg: `Invalid file path ${req.query.name}`
+      })
   }
 
   uploadFile(req, res) {
