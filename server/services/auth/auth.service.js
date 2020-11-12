@@ -17,7 +17,7 @@ class AuthService extends BaseService {
     super(app);
     this.users = app.$dbs.primary.users;
     new Strategy({app})
-    this.transporter = nodemailer.createTransport(app.$config.mailer.options)
+    this.transporter = nodemailer.createTransport(app.$config.mailer.options);
   }
 
 
@@ -37,7 +37,7 @@ class AuthService extends BaseService {
             return res.status(400).send(info)
           }
 
-          return res.status(500).send({msg: 'Your signin has failed'});
+          return res.status(400).send({msg: 'Your signin has failed'});
 
         }
 
@@ -60,25 +60,28 @@ class AuthService extends BaseService {
     let user = await this.users.findOne({where: `(email,eq,${req.body.email})`});
 
     if (user && user.email) {
-      throw new Error({msg: `Email '${req.body.email}' already registered`})
+      throw new Error(`Email '${req.body.email}' already registered`)
     }
 
     if (!validator.isEmail(req.body.email)) {
-      throw new Error({msg: `Invalid email`})
+      throw new Error( `Invalid email`)
     }
 
     user = await this.users.insert(req.body);
 
     user = await this.users.findOne({where: `(email,eq,${req.body.email})`});
 
-    await this.transporter.sendMail({
-      from: this.app.$config.mailer.from,
-      to: req.body.email,
-      subject: "Message title",
-      text: "Plaintext version of the message",
-      html: `<p> verification url : http://localhost:8080/api/v1/auth/email/validate/${user.email_verification_token}</p>`
-    })
-
+    try {
+      await this.transporter.sendMail({
+        from: this.app.$config.mailer.from,
+        to: user.email,
+        subject: "Verify Email",
+        text: `Verify your email by visiting following link : ${this.app.$config.siteUrl}email/verify/${user.email_verification_token}.`,
+      })
+    } catch (e) {
+      // throw e;
+      console.log('SMTP SendMail error : ',e.message);
+    }
     await util.promisify(req.login.bind(req))(user);
     return req.session.passport.user;
 
@@ -108,15 +111,17 @@ class AuthService extends BaseService {
       user.reset_password_expires = new Date(Date.now() + (60 * 60 * 1000))
 
       await this.users.updateByPk(user.id + '', user);
-
-      await this.transporter.sendMail({
-        from: this.app.$config.mailer.from,
-        to: user.email,
-        subject: "Message title",
-        text: "Plaintext version of the message",
-        html: `<p> Token : ${token}</p>`
-      })
-
+      try {
+        await this.transporter.sendMail({
+          from: this.app.$config.mailer.from,
+          to: user.email,
+          subject: "Password Reset Link",
+          text: `Visit following link to update your password : ${this.app.$config.siteUrl}user/password/reset?token=${token}.`,
+        })
+      } catch (e) {
+        // throw e;
+        console.log('SMTP SendMail error : ',e.message);
+      }
       return {msg: 'Check your email for password reset link.'};
 
     } catch (e) {
@@ -203,7 +208,7 @@ class AuthService extends BaseService {
     if (req.isAuthenticated()) {
 
       const user = await this.users.findOne({where: `(email,eq,${req.user.email})`});
-      const hashedPassword = await XcUtils.getBCryptHash(bcrypt,currentPassword, user.salt);
+      const hashedPassword = await XcUtils.getBCryptHash(bcrypt, currentPassword, user.salt);
       if (hashedPassword !== user.password) {
         throw new Error('Current password is wrong');
       }

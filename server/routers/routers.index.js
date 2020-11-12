@@ -237,6 +237,17 @@ class Router extends BaseComponent {
 
         this.router.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
       }
+
+
+
+      this.router.use((err, _req, res, next) => {
+        // logic
+        if (err) {
+          return res.status(400).json({msg: err.message || err.msg});
+        }
+        next();
+      });
+
     } catch (e) {
       console.log(e);
       throw e;
